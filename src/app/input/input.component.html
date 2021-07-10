@@ -1,0 +1,27 @@
+<div class="fields">
+  <div class="label">{{ label }}</div>
+  <div class="control">
+    <input
+      class="input"
+      [formControl]="$any(control)"
+      [ngClass]="{
+        'is-danger': showErrors()
+      }"
+    />
+  </div>
+
+  <ng-container *ngIf="showErrors()">
+    <div class="help is-danger" *ngIf="control?.errors?.required">
+      This value is fucking required
+    </div>
+    <div class="help is-danger" *ngIf="control?.errors?.minlength">
+      This value must have minimum length of
+      {{ control?.errors?.minlength.requiredLength }}
+    </div>
+    <div class="help is-danger" *ngIf="control?.errors?.maxLenth">
+      Value you have entered is
+      {{ control?.errors?.maxLenth.actualLength }} characters long, but it
+      cannot be longer than {{ control?.errors?.maxLength.requiredLength }}
+    </div>
+  </ng-container>
+</div>
